@@ -26,6 +26,7 @@ urlpatterns = [
     path('welcome_page/', views.welcome_page, name='welcome_page'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('user_habits', views.all_habits, name="user_habits"),
 ]
 
 if settings.DEBUG:
