@@ -15,9 +15,11 @@ class Habit(models.Model):
         return self.name
 
 
-
 class Record(models.Model):
     num_actions = models.PositiveIntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     record_date = models.DateField(auto_now_add=True)
-    
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.record_date}, {self.habit}'
