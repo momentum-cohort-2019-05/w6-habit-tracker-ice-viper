@@ -16,8 +16,14 @@ Including another URLconf
 from django.conf import settings
 from django.urls import path, include
 from django.contrib import admin
+from django.views.generic import RedirectView
+from core import views
+from django.conf.urls.static import static
+
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/welcome_page/')),
+    path('welcome_page/', views.welcome_page, name='welcome_page'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 ]

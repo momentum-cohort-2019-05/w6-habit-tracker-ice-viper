@@ -8,7 +8,7 @@ class Habit(models.Model):
     #True habit_types are positive habits
     habit_type = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    slug = models.SlugField(name, max_length=100, unique=True, null=False)
+    # slug = models.SlugField(name, max_length=100, unique=True, null=True)
     date_started = models.DateField(auto_now_add=True)
 
     def __str__(self):

@@ -5,8 +5,8 @@ from core.models import Habit, Record
 admin.site.register(Habit)
 admin.site.register(Record)
 
-class HabitAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("user", "name")}
+# class HabitAdmin(admin.ModelAdmin):
+#     prepopulated_fields = {"slug": ("name",)}
 
 
 
