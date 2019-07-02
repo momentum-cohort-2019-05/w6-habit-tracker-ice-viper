@@ -3,25 +3,25 @@
 {% block content %}
 <h2>{{ request.user }}'s Records</h2>
 <table class="f6 w-100 mw8 center" cellspacing="0">
-    <thead>
-      <tr class="stripe-dark">
-            <thead>
-                    <tr class="stripe-dark">
-                      <th class="fw6 tl pa3 bg-white">Habit</th>
-                      <th class="fw6 tl pa3 bg-white">Most Recent Record</th>
-                      <th class="fw6 tl pa3 bg-white">New Entry</th>
-                      <th class="fw6 tl pa3 bg-white">Edit Entry</th>
-                    </tr>
-                  </thead>
-                  <tbody class="lh-copy">
-{% for habit in habits_list %}
-<tr class="stripe-dark">
-        <td class="pa3">{{ habit.name }}</td>
-        <td class="pa3">habit.get_most_recent_record</td>
-        <td class="pa3">add new</td>
-        <td class="pa3">edit</td>
-      </tr>
-{% endfor %}
-</tbody>
+  <thead>
+    <tr class="stripe-dark">
+      <thead>
+        <tr class="stripe-dark">
+          <th class="fw6 tl pa3 bg-white">Habit</th>
+          <th class="fw6 tl pa3 bg-white">Most Recent Record</th>
+          <th class="fw6 tl pa3 bg-white">New Entry</th>
+          <th class="fw6 tl pa3 bg-white">Edit Entry</th>
+        </tr>
+      </thead>
+  <tbody class="lh-copy">
+    {% for habit in habits_list %}
+    <tr class="stripe-dark">
+      <td class="pa3">{{ habit.name }}</td>
+      <td class="pa3">{{ habit.latest_record }}</td>
+      <td class="pa3">add new</td>
+      <td class="pa3">edit</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}
