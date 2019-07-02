@@ -17,8 +17,8 @@ class Habit(models.Model):
     units = models.CharField(max_length=30, )
 
     # def get_most_recent_record(self):
-    #     ads = self.dailyrecord_set.order_by("-created_on")[0]
-    #     return ads.created_on
+    #     ads = self.dailyrecord_set.order_by("-record_date")[0]
+    #     return ads.record_date
 
     # def __str__(self):
     #     return self.name
@@ -26,9 +26,12 @@ class Habit(models.Model):
 
 class DailyRecord(models.Model):
     num_actions = models.PositiveIntegerField(default=0)
-    # created_on = models.DateTimeField(default=timezone.now)
-    created_on = models.DateField(default=date.today)
+    # record_date = models.DateTimeField(default=timezone.now)
+    record_date = models.DateField(default=date.today)
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ['habit', 'record_date']
+
     def __str__(self):
-        return f'{self.created_on}, {self.habit}'
+        return f'{self.record_date}, {self.habit}'
