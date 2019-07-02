@@ -74,13 +74,12 @@ def habit_detail(request, habit_pk):
     
     
     habits_plus = Habit.objects.annotate(
-        best_day=Max('dailyrecord__num_actions', filter=Q(user=request.user)),
-        avg_day=Avg('dailyrecord__num_actions', filter=Q(user=request.user)))
-
-    
+        best_day=Max('dailyrecord__num_actions', filter=Q(name=habit.name)))
+    habits_plus = habits_plus[0]
 
     return render(request,
                   "habit_detail.html",
                   context={'habits_plus': habits_plus, 'all_records': all_records,
-                  'habit': habit,})
+                  'habit': habit,
+                  })
 
