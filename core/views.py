@@ -10,7 +10,6 @@ from core.forms import RecordForm, HabitForm
 from django.contrib import messages
 
 
-
 # Create your views here.
 def welcome_page(request):
 
@@ -47,6 +46,7 @@ def record_create(request, habit_pk):
         "form": form
     })
 
+
 @login_required
 def habit_create(request):
 
@@ -61,9 +61,8 @@ def habit_create(request):
     else:
         form = HabitForm()
 
-    return render(request, 'habit_create.html', {
-        "form": form
-    })
+    return render(request, 'habit_create.html', {"form": form})
+
 
 @login_required
 def habit_detail(request, habit_pk):
@@ -71,15 +70,21 @@ def habit_detail(request, habit_pk):
     all_records = []
     for record in DailyRecord.objects.filter(habit=habit):
         all_records.append(record)
-    
-    
-    habits_plus = Habit.objects.annotate(
-        best_day=Max('dailyrecord__num_actions', filter=Q(name=habit.name)))
+
+    # habits_plus = Habit.objects.annotate(
+    #     best_day=Max('dailyrecord__num_actions', filter=Q(name=habit.name)))
+    habits_plus = Habit.objects.filter(name=habit.name).annotate(
+        best_day=Max('dailyrecord__num_actions', ))
     habits_plus = habits_plus[0]
+
+    habit_avg = Habit.objects.filter(name=habit.name).aggregate(
+        avg_day=Avg('dailyrecord__num_actions', ))
 
     return render(request,
                   "habit_detail.html",
-                  context={'habits_plus': habits_plus, 'all_records': all_records,
-                  'habit': habit,
+                  context={
+                      'habits_plus': habits_plus,
+                      'all_records': all_records,
+                      'habit': habit,
+                      'habit_avg': habit_avg,
                   })
-
