@@ -10,6 +10,7 @@ from core.forms import RecordForm, HabitForm
 from django.contrib import messages
 
 
+
 # Create your views here.
 def welcome_page(request):
 
@@ -65,12 +66,21 @@ def habit_create(request):
     })
 
 @login_required
-def habit_detail(request):
+def habit_detail(request, habit_pk):
+    habit = get_object_or_404(Habit, pk=habit_pk)
+    all_records = []
+    for record in DailyRecord.objects.filter(habit=habit):
+        all_records.append(record)
+    
+    
     habits_plus = Habit.objects.annotate(
-        best_day=Max('dailyrecord__num_actions'),
-        avg_day=Avg('dailyrecord__num_actions'))
+        best_day=Max('dailyrecord__num_actions', filter=Q(user=request.user)),
+        avg_day=Avg('dailyrecord__num_actions', filter=Q(user=request.user)))
+
+    
 
     return render(request,
                   "habit_detail.html",
-                  context={'habits_plus': habits_plus})
+                  context={'habits_plus': habits_plus, 'all_records': all_records,
+                  'habit': habit,})
 
