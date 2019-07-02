@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block meta %}{% endblock %}
-  <title>Habit Tracker - {% block title %}Home{% endblock %}</title>
+  <title>Ice Viper Habit Tracker - {% block title %}Home{% endblock %}</title>
 </head>
+<header>
+  <div class="pv2 mv0 db tr">
+    {% if request.user.is_authenticated %}
+    Logged in as {{ request.user }} | <a class="underline black link dim pa3" href="/favorites_list">View
+        Favorites</a> | <a class="underline black link dim pa3" href="{% url 'auth_logout' %}">Logout</a>
+        {% else %}
+        <a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a>
+        <a class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
+        {% endif %}
+    </div> 
+  </header>
 <body>
+
   {% block content %}
   {% endblock %}
 </body>
