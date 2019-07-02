@@ -11,8 +11,7 @@
 <header>
   <div class="pv2 mv0 db tr">
     {% if request.user.is_authenticated %}
-    Logged in as {{ request.user }} | <a class="underline black link dim pa3" href="/favorites_list">View
-        Favorites</a> | <a class="underline black link dim pa3" href="{% url 'auth_logout' %}">Logout</a>
+    Logged in as {{ request.user }} | <a class="underline black link dim pa3" href="/user_habits">View My Habits</a> | <a class="underline black link dim pa3" href="{% url 'auth_logout' %}">Logout</a>
         {% else %}
         <a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a>
         <a class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
