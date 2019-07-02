@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('user_habits', views.all_habits, name="user_habits"),
     path('record_create/<int:habit_pk>/', views.record_create, name='record_create'),
+    path('habit_create/', views.habit_create, name='habit_create')
 ]
 
 if settings.DEBUG:

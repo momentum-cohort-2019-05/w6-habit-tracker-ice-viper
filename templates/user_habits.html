@@ -2,7 +2,9 @@
 
 {% block content %}
 <h2>{{ request.user }}'s Records</h2>
-<h4>New Habit Button</h4>
+<h4>
+  <a href="{% url 'habit_create' %}">Create New Habit</a> 
+</h4>
 <table class="f6 w-100 mw8 center" cellspacing="0">
   <thead>
     <tr class="stripe-dark">

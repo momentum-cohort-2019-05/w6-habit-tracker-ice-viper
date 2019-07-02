@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from django.db.models import Max, Q, Avg
-from core.forms import RecordForm
+from core.forms import RecordForm, HabitForm
 from django.contrib import messages
 
 
@@ -43,6 +43,24 @@ def record_create(request, habit_pk):
 
     return render(request, 'record_create.html', {
         "habit": habit,
+        "form": form
+    })
+
+@login_required
+def habit_create(request):
+
+    if request.method == "POST":
+        form = HabitForm(data=request.POST)
+        if form.is_valid():
+            habit = form.save(commit=False)
+            habit.user = request.user
+            habit.save()
+            messages.success(request, "Your card was created successfully.")
+            return redirect('user_habits')
+    else:
+        form = HabitForm()
+
+    return render(request, 'habit_create.html', {
         "form": form
     })
 
