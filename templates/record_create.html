@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Create new card for {{ stack.name }}</h1>
+
+<form action="{% url 'record_create' habit_pk=habit.pk %}" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <p>
+    <button type="submit">Create Record</button>
+  </p>
+</form>
+{% endblock %}

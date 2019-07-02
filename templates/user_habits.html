@@ -2,6 +2,7 @@
 
 {% block content %}
 <h2>{{ request.user }}'s Records</h2>
+<h4>New Habit Button</h4>
 <table class="f6 w-100 mw8 center" cellspacing="0">
   <thead>
     <tr class="stripe-dark">
@@ -18,7 +19,7 @@
     <tr class="stripe-dark">
       <td class="pa3">{{ habit.name }}</td>
       <td class="pa3">{{ habit.latest_record }}</td>
-      <td class="pa3">add new</td>
+      <td class="pa3"><a href="{% url 'record_create' habit_pk=habit.pk %}">New Record</a></td>
       <td class="pa3">edit</td>
     </tr>
     {% endfor %}
