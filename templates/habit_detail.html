@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>
-  {{ habit.name|title }} goal {{ habit.habit_goal }}
+  {{ habit.name|title }} goal is {{ habit.habit_goal }} {{ habit.units }}
 </h1>
 <h3>
   The most {{ habit.units }} for one day is {{ habits_plus.best_day }}!
