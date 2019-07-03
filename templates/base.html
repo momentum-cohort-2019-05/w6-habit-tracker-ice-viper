@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,24 @@
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css">
   <title>Ice Viper Habit Tracker - {% block title %}Home{% endblock %}</title>
 </head>
-<header class="bg-blue">
-  <div class="pv2 mv0 db white pr4 tr">
+<header class="bg-blue ">
+  <div class="pv2 mv0 db white pr4 tr avenir">
     {% if request.user.is_authenticated %}
-    Logged in as {{ request.user }} | <a class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'auth_logout' %}">Logout</a>
-        {% else %}
-        <a class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'auth_login' %}">Sign In</a>
-        <a class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'registration_register' %}">Register</a>
-        {% endif %}
-    </div> 
-  </header>
+    Logged in as {{ request.user }}
+    <a class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'user_habits' %}">All Habits</a> <a
+      class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'auth_logout' %}">Logout</a>
+    {% else %}
+    <a class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'auth_login' %}">Sign In</a>
+    <a class="f6 br-pill white no-underline ba grow pv2 ph3 dib" href="{% url 'registration_register' %}">Register</a>
+    {% endif %}
+  </div>
+</header>
+
 <body>
-  {% block content %}
-  {% endblock %}
+  <div class="mw9 center pa4 pt2-ns ph7-l avenir">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
+
 </html>

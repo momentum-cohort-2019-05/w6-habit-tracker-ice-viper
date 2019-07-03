@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ request.user }}'s Records</h2>
+<h2>{{ request.user|title }}'s Records</h2>
 <h4>
-  <a href="{% url 'habit_create' %}">Create New Habit</a> 
+  <a href="{% url 'habit_create' %}">Create New Habit</a>
 </h4>
 <table class="f6 w-100 mw8 center" cellspacing="0">
   <thead>
@@ -19,7 +19,7 @@
   <tbody class="lh-copy">
     {% for habit in habits_list %}
     <tr class="stripe-dark">
-      <td class="pa3"><a href="{% url 'habit_detail' habit_pk=habit.pk %}">{{ habit.name }}</a></td>
+      <td class="pa3"><a href="{% url 'habit_detail' habit_pk=habit.pk %}">{{ habit.name|title }}</a></td>
       <td class="pa3">{{ habit.latest_record }}</td>
       <td class="pa3"><a href="{% url 'record_create' habit_pk=habit.pk %}">New Record</a></td>
       <td class="pa3">edit</td>

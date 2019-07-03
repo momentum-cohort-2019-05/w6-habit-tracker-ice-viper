@@ -36,7 +36,7 @@ def record_create(request, habit_pk):
             record = form.save(commit=False)
             record.habit = habit
             record.save()
-            messages.success(request, "Your card was created successfully.")
+            messages.success(request, "Your record was created successfully.")
             return redirect('user_habits')
     else:
         form = RecordForm()
@@ -56,7 +56,7 @@ def habit_create(request):
             habit = form.save(commit=False)
             habit.user = request.user
             habit.save()
-            messages.success(request, "Your card was created successfully.")
+            messages.success(request, "Your habit was created successfully.")
             return redirect('user_habits')
     else:
         form = HabitForm()

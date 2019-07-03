@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>
-  {{ habit.name }} goal {{ habit.habit_goal }}
+  {{ habit.name|title }} goal {{ habit.habit_goal }}
 </h1>
 <h3>
   The most {{ habit.units }} for one day is {{ habits_plus.best_day }}!
@@ -15,7 +15,7 @@
       <thead>
         <tr class="stripe-dark">
           <th class="fw6 tl pa3 bg-white">Date</th>
-          <th class="fw6 tl pa3 bg-white">{{ habit.units }}</th>
+          <th class="fw6 tl pa3 bg-white">{{ habit.units|title }}</th>
           <th class="fw6 tl pa3 bg-white">Achieved</th>
         </tr>
       </thead>
@@ -26,15 +26,15 @@
       <td class="pa3">{{ record.num_actions }}</td>
       {% if habit.habit_type %}
       {% if record.num_actions >= habit.habit_goal %}
-      <td class="pa3">Achieved</td>
+      <td class="  bg-green pa3">Achieved</td>
       {% else %}
-      <td class="pa3">Not Achieved</td>
+      <td class="bg-red pa3">Not Achieved</td>
       {% endif%}
       {% else %}
       {% if record.num_actions <= habit.habit_goal %}
-      <td class="pa3"> Achieved</td>
+      <td class=" bg-green pa3"> Achieved</td>
       {% else %}
-      <td class="pa3">Not Achieved</td>
+      <td class="bg-red pa3">Not Achieved</td>
       {% endif %}
       {% endif %}
     </tr>
