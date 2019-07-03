@@ -19,8 +19,8 @@ def welcome_page(request):
 
 @login_required
 def all_habits(request):
-    habits_list = Habit.objects.annotate(latest_record=Max(
-        'dailyrecord__record_date', filter=Q(user=request.user)))
+    habits_list = Habit.objects.filter(user=request.user).annotate(latest_record=Max(
+        'dailyrecord__record_date', ))
 
     return render(request, "user_habits.html", {
         'habits_list': habits_list,
