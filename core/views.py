@@ -74,9 +74,10 @@ def habit_create(request):
 def habit_detail(request, habit_pk):
     habit = get_object_or_404(Habit, pk=habit_pk)
     all_records = []
-    for record in DailyRecord.objects.filter(habit=habit):
+    for record in DailyRecord.objects.filter(
+            habit=habit).order_by('-record_date'):
         all_records.append(record)
-    all_records.reverse()
+    # all_records.reverse()
 
     # habits_plus = Habit.objects.annotate(
     #     best_day=Max('dailyrecord__num_actions', filter=Q(name=habit.name)))
