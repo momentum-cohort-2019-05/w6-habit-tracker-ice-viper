@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ request.user|title }}'s Records</h2>
+<h2 class="f2 f-subheadline-l measure lh-title fw6 tc blue">{{ request.user|title }}'s Habits</h2>
 <h4>
   <a href="{% url 'habit_create' %}">Create New Habit</a>
 </h4>
@@ -12,7 +12,6 @@
         <tr class="stripe-dark">
           <th class="fw6 tl pa3 bg-white">Habit</th>
           <th class="fw6 tl pa3 bg-white">Most Recent Record Date</th>
-          <th class="fw6 tl pa3 bg-white">Most Recent Record Value</th>
           <th class="fw6 tl pa3 bg-white">Add or Edit Entry</th>
         </tr>
       </thead>
@@ -21,7 +20,6 @@
     <tr class="stripe-dark">
       <td class="pa3"><a href="{% url 'habit_detail' habit_pk=habit.pk %}">{{ habit.name|title }}</a></td>
       <td class="pa3">{{ habit.latest_record }}</td>
-      <td class="pa3">value</td>
       <td class="pa3"><a href="{% url 'record_create' habit_pk=habit.pk %}">Add or update a record</a></td>
     </tr>
     {% endfor %}
