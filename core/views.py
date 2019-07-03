@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.db.models import Max, Q, Avg
 from core.forms import RecordForm, HabitForm
 from django.contrib import messages
+from datetime import date
 
 
 # Create your views here.
@@ -29,9 +30,14 @@ def all_habits(request):
 @login_required
 def record_create(request, habit_pk):
     habit = get_object_or_404(Habit, pk=habit_pk)
+    record_date = request.POST.get('record_date', date.today())
+    try:
+        record = habit.dailyrecord_set.get(record_date=record_date)
+    except DailyRecord.DoesNotExist:
+        record = DailyRecord(habit=habit, record_date=record_date)
 
     if request.method == "POST":
-        form = RecordForm(data=request.POST)
+        form = RecordForm(data=request.POST, instance=record)
         if form.is_valid():
             record = form.save(commit=False)
             record.habit = habit
