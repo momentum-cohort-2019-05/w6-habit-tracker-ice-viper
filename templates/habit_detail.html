@@ -8,7 +8,9 @@
   The most {{ habit.units }} for one day is {{ habits_plus.best_day }}!
 </h3>
 <h3> Your average {{habit.units}} per day was {{ habit_avg.avg_day }}</h3>
-
+<p>
+  <a href="{% url 'record_create' habit_pk=habit.pk %}">Add or update a record</a></p>
+<h1>oldest date {{ oldest_record }}</h1>
 <table class="f6 w-100 mw8 center" cellspacing="0">
   <thead>
     <tr class="stripe-dark">

@@ -5,10 +5,10 @@ from django.db.models import Max, Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.urls import reverse
-from django.db.models import Max, Q, Avg
+from django.db.models import Max, Q, Avg, Min
 from core.forms import RecordForm, HabitForm
 from django.contrib import messages
-from datetime import date
+from datetime import date, timedelta
 
 
 # Create your views here.
@@ -83,6 +83,10 @@ def habit_detail(request, habit_pk):
         best_day=Max('dailyrecord__num_actions', ))
     habits_plus = habits_plus[0]
 
+    oldest_record = Habit.objects.filter(name=habit.name).annotate(
+        get_oldest=Min('dailyrecord__record_date', ))
+    oldest_record = oldest_record[0].get_oldest
+
     habit_avg = Habit.objects.filter(name=habit.name).aggregate(
         avg_day=Avg('dailyrecord__num_actions', ))
 
@@ -93,4 +97,5 @@ def habit_detail(request, habit_pk):
                       'all_records': all_records,
                       'habit': habit,
                       'habit_avg': habit_avg,
+                      'oldest_record': oldest_record
                   })
